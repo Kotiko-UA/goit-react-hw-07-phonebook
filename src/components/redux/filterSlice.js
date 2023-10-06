@@ -10,6 +10,6 @@ export const filterSlicer = createSlice({
     },
   },
 });
-
+export const selectStatusFilter = state => state.filters;
 export const { filterStatus } = filterSlicer.actions;
 export const filterReducer = filterSlicer.reducer;
