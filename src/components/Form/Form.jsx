@@ -19,18 +19,18 @@ const SignupSchema = Yup.object().shape({
 export const FormPhoneBook = () => {
   const contacts = useSelector(state => state.contacts);
   const dispatch = useDispatch();
-  const onSubmit = ({ name, number }) => {
-    if (contacts.find(contact => contact.number === number)) {
-      Notify.failure(`${number} is alredy in contacts`);
+  const onSubmit = ({ name, phone }) => {
+    if (contacts.find(contact => contact.phone === phone)) {
+      Notify.failure(`${phone} is alredy in contacts`);
       return;
     }
-    const newContact = { name, number };
+    const newContact = { name, phone };
     dispatch(addContacts(newContact));
   };
   return (
     <div>
       <Formik
-        initialValues={{ name: '', number: '' }}
+        initialValues={{ name: '', phone: '' }}
         onSubmit={(values, actions) => {
           onSubmit(values);
           actions.resetForm();
