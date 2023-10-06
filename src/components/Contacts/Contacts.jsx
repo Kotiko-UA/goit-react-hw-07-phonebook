@@ -15,7 +15,7 @@ export const Contacts = () => {
         {visibleNumbers.map(user => (
           <Li key={user.id}>
             <P>{user.name}:</P>
-            <P>{user.number}</P>
+            <P>{user.phone}</P>
             <Button onClick={() => onDelete(user.id)} type="button">
               delete
             </Button>

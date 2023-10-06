@@ -4,6 +4,7 @@ import { Button, Error, FormEl, Input, Label } from './Form.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix';
 import { addContacts } from 'components/redux/operations';
+import { selectContacts } from 'components/redux/contactSlice';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -17,20 +18,20 @@ const SignupSchema = Yup.object().shape({
 });
 
 export const FormPhoneBook = () => {
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
-  const onSubmit = ({ name, phone }) => {
-    if (contacts.find(contact => contact.phone === phone)) {
-      Notify.failure(`${phone} is alredy in contacts`);
+  const onSubmit = ({ name, number }) => {
+    if (contacts.find(contact => contact.phone === number)) {
+      Notify.failure(`${number} is alredy in contacts`);
       return;
     }
-    const newContact = { name, phone };
+    const newContact = { name, phone: number };
     dispatch(addContacts(newContact));
   };
   return (
     <div>
       <Formik
-        initialValues={{ name: '', phone: '' }}
+        initialValues={{ name: '', number: '' }}
         onSubmit={(values, actions) => {
           onSubmit(values);
           actions.resetForm();
