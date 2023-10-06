@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { Button, Error, FormEl, Input, Label } from './Form.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix';
-import { addContact } from 'components/redux/contactSlice';
+import { addContacts } from 'components/redux/operations';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -25,7 +25,7 @@ export const FormPhoneBook = () => {
       return;
     }
     const newContact = { name, number };
-    dispatch(addContact(newContact));
+    dispatch(addContacts(newContact));
   };
   return (
     <div>
